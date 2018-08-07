@@ -23,7 +23,7 @@ declare namespace planck {
         y: number;
 
         toString(): string;
-        clone(depricated): Vec2;//TODO depricated?
+        clone(depricated: any): Vec2;//TODO depricated?
         setZero(): Vec2;
         set(x: number, y: number): Vec2;
         set(value: Vec2): Vec2;
@@ -688,8 +688,8 @@ declare namespace planck {
         getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): 0.0;//not implemented?
         initVelocityConstraints(step: { dt: number, warmStarting: boolean, dtRatio: number }): void;
-        solveVelocityConstraints(step?): void;
-        solvePositionConstraints(step?): boolean;
+        solveVelocityConstraints(step?: any): void;//TODO
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type DistanceJointDef = Partial<{
         frequencyHz: number,
@@ -751,7 +751,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
-        solvePositionConstraints(step?): true;
+        solvePositionConstraints(step?: any): true;//TODO
     }
     type FrictionJointDef = Partial<{
         maxForce: number,
@@ -816,8 +816,8 @@ declare namespace planck {
         getReactionForce(inv_dt: number): number;//TODO BUG IN PLANCK, SHOULD BE VEC2?
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean}): void;
-        solveVelocityConstraints(step?): void;
-        solvePositionConstraints(step?): boolean;
+        solveVelocityConstraints(step?: any): void;//TODO
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type GearJointDef = Partial<{
         ratio: number,
@@ -884,7 +884,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number, inv_dt: number}): void;
-        solvePositionConstraints(step?): true;
+        solvePositionConstraints(step?: any): true;//TODO
     }
     type MotorJointDef = Partial<{
         maxForce: number,
@@ -947,7 +947,7 @@ declare namespace planck {
         shiftOrigin(newOrigin: Vec2): void;
         initVelocityConstraints(step: {dt: number, warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
-        solvePositionConstraints(step?): true;
+        solvePositionConstraints(step?: any): true;//TODO
     }
     type MouseJointDef = Partial<{
         maxForce: number,
@@ -1032,7 +1032,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
-        solvePositionConstraints(step?): boolean;
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type PrismaticJointDef = Partial<{
         enableLimit: boolean,
@@ -1101,8 +1101,8 @@ declare namespace planck {
         getReactionForce(inv_dt: number): Vec3;
         getReactionTorque(inv_dt: number): 0.0;//not implemented or intended?
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
-        solveVelocityConstraints(step?): void;
-        solvePositionConstraints(step?): boolean;
+        solveVelocityConstraints(step?: any): void;//TODO
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type PulleyJointDef = Partial<{
         collideConnected: boolean,
@@ -1180,7 +1180,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
-        solvePositionConstraints(step?): boolean;
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type RevoluteJointDef = Partial<{
         lowerAngle: number,
@@ -1246,7 +1246,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): 0.0;//not implemented or intended?
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {inv_dt: number}): void;
-        solvePositionConstraints(step?): boolean;
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type RopeJointDef = Partial<{
         maxLength: number,
@@ -1307,8 +1307,8 @@ declare namespace planck {
         getReactionForce(inv_dt: number): Vec2;//TODO BUG in planck
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dt: number, dtRatio: number}): void;
-        solveVelocityConstraints(step?): void;
-        solvePositionConstraints(step?): boolean;
+        solveVelocityConstraints(step?: any): void;//TODO
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type WeldJointDef = Partial<{
         frequencyHz: number,
@@ -1377,7 +1377,7 @@ declare namespace planck {
         getJointSpeed(): number;
         isMotorEnabled(): boolean;
         enableMotor(flag: boolean): void;
-        setMotorSpeed(speed): void;
+        setMotorSpeed(speed: number): void;
         getMotorSpeed(): number;
         setMaxMotorTorque(torque: number): void;
         getMaxMotorTorque(): number;
@@ -1392,7 +1392,7 @@ declare namespace planck {
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dt: number, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
-        solvePositionConstraints(step?): boolean;
+        solvePositionConstraints(step?: any): boolean;//TODO
     }
     type WheelJointDef = Partial<{
         enableMotor: boolean,
@@ -1502,7 +1502,7 @@ declare namespace planck {
         diff(a: AABB, b: AABB): number;
     }
     let Shape: {
-        isValid(Shape): boolean;
+        isValid(Shape: any): boolean;//TODO Shape | null | undefined?
     }
     let Fixture: {
         new(body: Body, shape: Shape, def?: FixtureDef | number | null): Fixture;
