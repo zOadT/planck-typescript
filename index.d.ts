@@ -1,4 +1,4 @@
-// Type definitions for planck-js 0.1.44
+// Type definitions for planck-js 0.1.45
 // Project: http://piqnt.com/planck.js/
 // Definitions by: Oliver Zell <https://github.com/zOadT>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -747,7 +747,7 @@ declare namespace planck {
         getMaxTorque(): number;
         getAnchorA(): Vec2
         getAnchorB(): Vec2
-        getReactionForce(inv_dt: number): number;
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
@@ -813,7 +813,7 @@ declare namespace planck {
         getRatio(): number;
         getAnchorA(): Vec2;
         getAnchorB (): Vec2;
-        getReactionForce(inv_dt: number): number;//TODO BUG IN PLANCK, SHOULD BE VEC2?
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean}): void;
         solveVelocityConstraints(step?: any): void;//TODO
@@ -880,7 +880,7 @@ declare namespace planck {
         getAngularOffset(): number;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): number;//BUG should be Vec2
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number, inv_dt: number}): void;
@@ -1028,7 +1028,7 @@ declare namespace planck {
         getMotorForce(inv_dt: number): number;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): number;
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
@@ -1098,7 +1098,7 @@ declare namespace planck {
         getCurrentLengthB(): Vec2;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): Vec3;
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): 0.0;//not implemented or intended?
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step?: any): void;//TODO
@@ -1176,7 +1176,7 @@ declare namespace planck {
         setLimits(lower: number, upper: number): void;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): Vec2// TODO bug in planck
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
@@ -1242,7 +1242,7 @@ declare namespace planck {
         getLimitState(): LIMIT_STATE;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): Vec2;//TODO BUG in planck
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): 0.0;//not implemented or intended?
         initVelocityConstraints(step: {warmStarting: boolean, dtRatio: number}): void;
         solveVelocityConstraints(step: {inv_dt: number}): void;
@@ -1304,7 +1304,7 @@ declare namespace planck {
         getDampingRatio(): number;
         getAnchorA(): Vec2
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): Vec2;//TODO BUG in planck
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dt: number, dtRatio: number}): void;
         solveVelocityConstraints(step?: any): void;//TODO
@@ -1388,7 +1388,7 @@ declare namespace planck {
         getSpringDampingRatio(): number;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
-        getReactionForce(inv_dt: number): Vec2;//TODO BUG in planck 
+        getReactionForce(inv_dt: number): Vec2;
         getReactionTorque(inv_dt: number): number;
         initVelocityConstraints(step: {warmStarting: boolean, dt: number, dtRatio: number}): void;
         solveVelocityConstraints(step: {dt: number}): void;
