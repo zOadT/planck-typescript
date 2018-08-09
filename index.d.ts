@@ -1433,7 +1433,7 @@ declare namespace planck {
         zero(): Vec2;
         neo(x: number, y: number): Vec2;
         clone(v: Vec2/*, depricated*/): Vec2;//depricated?
-        isValid(v: Vec2): boolean;
+        isValid(v: any): v is { x: number, y: number };
         //asssert(o: Vec2): void;
         lengthOf(v: Vec2): number;
         lengthSquared(v: Vec2): number;
@@ -1467,7 +1467,7 @@ declare namespace planck {
         clone(xf: Transform): Transform;
         neo(position: Vec2, rotation: number): Transform;
         identity(): Transform;
-        isValid(o: Transform): boolean;//Typeguard?
+        isValid(o: any): o is { p: { x: number, y: number }, q: { s: number, c: number } };
         //assert(o: Transform): void;
         mul(a: Transform, b: Vec2): Vec2;
         mul(a: Transform, b: Transform): Transform;
@@ -1483,7 +1483,7 @@ declare namespace planck {
         neo(angle: number): Rot;
         clone(rot: Rot): Rot;
         identity(/*rot*/): Rot;
-        isValid(o: Rot): boolean;
+        isValid(o: any): o is { s: number, c: number };
         //assert(o: Rot): void;
         mul(rot: Rot, m: Rot): Rot;
         mul(rot: Rot, m: Vec2): Vec2;
@@ -1502,7 +1502,7 @@ declare namespace planck {
         diff(a: AABB, b: AABB): number;
     }
     let Shape: {
-        isValid(Shape: any): boolean;//TODO Shape | null | undefined?
+        isValid(shape: Shape | null | undefined): shape is Shape;
     }
     let Fixture: {
         new(body: Body, shape: Shape, def?: FixtureDef | number | null): Fixture;
