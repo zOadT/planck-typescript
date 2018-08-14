@@ -550,8 +550,8 @@ declare namespace planck {
         getSupportVertex(d: Vec2): Vec2;
         set(shape: Shape, index: number): void;//TODO index is only used by Chain
     }
-    type Shape = Circle | Edge | Polygon | Chain;
-    interface Circle {
+    type Shape = CircleShape | EdgeShape | PolygonShape | ChainShape;
+    interface CircleShape {
         m_type: 'circle';
         m_radius: number;
         m_p: Vec2;
@@ -566,7 +566,7 @@ declare namespace planck {
         /**
          * @deprecated
          */
-        _clone(): Circle;
+        _clone(): CircleShape;
         getChildCount(): 1;
         testPoint(xf: Transform, p: Vec2): boolean;
         rayCast(output: RayCastOutput, input: RayCastInput, transform: Transform, childIndex?: number): boolean;
@@ -574,7 +574,7 @@ declare namespace planck {
         computeMass(massData: MassData, density: number): void;
         computeDistanceProxy(proxy: DistanceProxy): void;
     }
-    interface Edge {
+    interface EdgeShape {
         m_type: 'edge';
         m_radius: number;
         m_vertex1: Vec2;
@@ -584,13 +584,13 @@ declare namespace planck {
         m_hasVertex0: boolean;
         m_hasVertex3: boolean;
 
-        setNext(v3?: Vec2): Edge;
-        setPrev(v0?: Vec2): Edge;
-        _set(v1: Vec2, v2: Vec2): Edge;
+        setNext(v3?: Vec2): EdgeShape;
+        setPrev(v0?: Vec2): EdgeShape;
+        _set(v1: Vec2, v2: Vec2): EdgeShape;
 
         getRadius(): number;
         getType(): 'edge';
-        _clone(): Edge;
+        _clone(): EdgeShape;
         getChildCount(): 1;
         testPoint(xf: Transform, p: Vec2): false;
         rayCast(output: RayCastOutput, input: RayCastInput, xf: Transform, childIndex?: number): boolean;
@@ -598,7 +598,7 @@ declare namespace planck {
         computeMass(massData: MassData, density?: number): void;
         computeDistanceProxy(proxy: DistanceProxy): void;
     }
-    interface Polygon {
+    interface PolygonShape {
         m_type: 'polygon';
         m_radius: number;
         m_centroid: Vec2;
@@ -609,7 +609,7 @@ declare namespace planck {
         getVertex(index: number): Vec2;
         getRadius(): number;
         getType(): 'polygon';
-        _clone(): Polygon;
+        _clone(): PolygonShape;
         getChildCount(): 1;
         /**
          * @private
@@ -627,7 +627,7 @@ declare namespace planck {
         validate(): void;
         computeDistanceProxy(proxy: DistanceProxy): void;
     }
-    interface Chain {
+    interface ChainShape {
         m_type: 'chain';
         m_radius: number;
         m_vertices: Vec2[];
@@ -637,15 +637,15 @@ declare namespace planck {
         m_hasPrevVertex: boolean;
         m_hasNextVertex: boolean;
 
-        _createLoop(vertices: Vec2[]): Chain;
-        _createChain(vertices: Vec2[]): Chain;
+        _createLoop(vertices: Vec2[]): ChainShape;
+        _createChain(vertices: Vec2[]): ChainShape;
         _setPrevVertex(prevVertex: Vec2): void;
         _setNextVertex(nextVertex: Vec2): void;
         getRadius(): number;
         getType(): 'chain';
-        _clone(): Chain;
+        _clone(): ChainShape;
         getChildCount(): number;
-        getChildEdge(edge: Edge, childIndex: number): void;
+        getChildEdge(edge: EdgeShape, childIndex: number): void;
         getVertex(index: number): Vec2;
         testPoint(xf: Transform, p: Vec2): false;
         rayCast(output: RayCastOutput, input: RayCastInput, xf: Transform, childIndex: number): boolean;
@@ -1564,38 +1564,38 @@ declare namespace planck {
     }
 
     let Circle: {
-        new(position: Vec2, radius?: number): Circle;
-        new(radius?: number): Circle;
-        (position: Vec2, radius?: number): Circle;
-        (radius?: number): Circle;
+        new(position: Vec2, radius?: number): CircleShape;
+        new(radius?: number): CircleShape;
+        (position: Vec2, radius?: number): CircleShape;
+        (radius?: number): CircleShape;
 
         TYPE: 'circle';
     }
     let Edge: {
-        new(v1?: Vec2, v2?: Vec2): Edge;
-        (v1?: Vec2, v2?: Vec2): Edge;
+        new(v1?: Vec2, v2?: Vec2): EdgeShape;
+        (v1?: Vec2, v2?: Vec2): EdgeShape;
 
         TYPE: 'edge';
     }
     let Polygon: {
-        new(vertices: Vec2[]): Polygon;
-        (vertices: Vec2[]): Polygon;
+        new(vertices: Vec2[]): PolygonShape;
+        (vertices: Vec2[]): PolygonShape;
 
         TYPE: 'polygon';
     }
     let Chain: {
-        new(vertices: Vec2[], loop?: boolean): Chain;
-        new(): Chain;
-        (vertices: Vec2[], loop?: boolean): Chain;
-        (): Chain;
+        new(vertices: Vec2[], loop?: boolean): ChainShape;
+        new(): ChainShape;
+        (vertices: Vec2[], loop?: boolean): ChainShape;
+        (): ChainShape;
 
         TYPE: 'chain';
     }
     let Box: {
-        new(hx: number, hy: number, center: Vec2, angle?: number): Polygon;
-        new(hx: number, hy: number): Polygon;
-        (hx: number, hy: number, center: Vec2, angle?: number): Polygon;
-        (hx: number, hy: number): Polygon;
+        new(hx: number, hy: number, center: Vec2, angle?: number): PolygonShape;
+        new(hx: number, hy: number): PolygonShape;
+        (hx: number, hy: number, center: Vec2, angle?: number): PolygonShape;
+        (hx: number, hy: number): PolygonShape;
 
         TYPE: 'polygon';
     }
