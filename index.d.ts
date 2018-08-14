@@ -12,6 +12,7 @@ declare namespace planck {
     type BroadPhase = any;
     type Sweep = any;
     type Manifold = any;
+    type WorldManifold = any;
     namespace Manifold {
         type Type = any;
     }
@@ -135,7 +136,7 @@ declare namespace planck {
         m_proxyCount: number;
         m_userData: unknown;
 
-        getType(): string;
+        getType(): "circle" | "edge" | "polygon" | "chain";
         getShape(): Shape;
         isSensor(): boolean;
         setSensor(sensor: boolean): void;
@@ -380,6 +381,36 @@ declare namespace planck {
         p_invMassB: number | undefined;
         p_invIA: number | undefined;
         p_invIB: number | undefined;
+        
+        initConstraint(step: {warmStarting: boolean, dtRatio: number}): void;
+        getManifold(): Manifold;
+        getWorldManifold(worldManifold: WorldManifold | null | undefined): WorldManifold;
+        setEnabled(flag: boolean): void;
+        isEnabled(): boolean;
+        isTouching(): boolean;
+        getNext(): Contact | null;
+        getFixtureA(): Fixture;
+        getFixtureB(): Fixture;
+        getChildIndexA(): number;
+        getChildIndexB(): number;
+        flagForFiltering(): void;
+        setFriction(friction: number): void;
+        getFriction(): number;
+        resetFriction(): void;
+        setRestitution(restitution: number): void;
+        getRestitution(): number;
+        resetRestitution(): void;
+        setTangentSpeed(speed: number): void;
+        getTangentSpeed(): number;
+        evaluate(manifold: Manifold, xfA: Transform, xfB: Transform): void;
+        update(listener?: {beginContact(contact: Contact): void, endContact(contact: Contact): void, oreSolve(contact: Contact, oldManifold: Manifold): void}): void;
+        solvePositionConstraint(step: any): number;
+        solvePositionConstraintTOI(step: any, toiA?: Body | null, toiB?: Body | null): number
+        _solvePositionConstraint(step: any, toi: boolean, toiA?: Body | null, toiB?: Body | null): number;
+        initVelocityConstraint(step: {blockSolve: boolean}): void;
+        warmStartConstraint(step?: any): void;
+        storeConstraintImpulses(step?: any): void;
+        solveVelocityConstraint(step: {blockSolve: boolean}): void;
     }
     interface JointEdge {
         //TODO
@@ -1516,7 +1547,14 @@ declare namespace planck {
         DYNAMIC: 'dynamic';
     }
     let Contact: {
-        //TODO new
+        new(fA: Fixture, indexA: number, fB: Fixture, indexB: number,
+            evaluateFcn: (manifold: Manifold, xfA: Transform, fixtureA: Fixture, indexA: number, xfB: Transform, fixtureB: Fixture, indexB: number) => void): Contact;
+        
+        addType(type1: "circle" | "edge" | "polygon" | "chain", type2: "circle" | "edge" | "polygon" | "chain",
+            callback: (manifold: Manifold, xfA: Transform, fixtureA: Fixture, indexA: number, xfB: Transform, fixtureB: Fixture, indexB: number) => void &
+                { destroyFcn?: (contact: Contact) => void }): void;
+        create(fixtureA: Fixture, indexA: number, fixtureB: Fixture, indexB: number): Contact | null;
+        destroy(contact: Contact, listener: { endContact: (contact: Contact) => void }): void;
     }
 
     let Joint: {}
