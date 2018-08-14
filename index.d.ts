@@ -494,12 +494,12 @@ declare namespace planck {
         getTreeQuality(): number;
         shiftOrigin(newOrigin: Vec2): void;
         createBody(def?: BodyDef | null): Body;
-        createBody(position: Vec2, angle: number): Body;
+        createBody(position: Vec2, angle?: number): Body;
         createDynamicBody(def?: BodyDef | null): Body;
-        createDynamicBody(position: Vec2, angle: number): Body;
+        createDynamicBody(position: Vec2, angle?: number): Body;
         createDynamicBody(): Body;
         createKinematicBody(def?: BodyDef | null): Body;
-        createKinematicBody(position: Vec2, angle: number): Body;
+        createKinematicBody(position: Vec2, angle?: number): Body;
         createKinematicBody(): Body;
         destroyBody(b: Body): boolean;//m_destroyed not in Body but used!?
         createJoint<T extends Joint>(joint: T): T | null;
@@ -517,14 +517,14 @@ declare namespace planck {
 
         on(name: 'begin-contact', listener: (contact: Contact) => void): World;
         on(name: 'end-contact', listener: (contact: Contact) => void): World;
-        on(name: 'post-solve', listener: (contact: Contact, oldManifold: Manifold) => void): World;
+        on(name: 'pre-solve', listener: (contact: Contact, oldManifold: Manifold) => void): World;
         on(name: 'post-solve', listener: (contact: Contact, impulse: ContactImpulse) => void): World;
         on(name: 'remove-body', listener: (body: Body) => void): World;// never gets called?
         on(name: 'remove-joint', listener: (joint: Joint) => void): World;
         on(name: 'remove-fixture', listener: (fixture: Fixture) => void): World;
         off(name: 'begin-contact', listener: (contact: Contact) => void): World;
         off(name: 'end-contact', listener: (contact: Contact) => void): World;
-        off(name: 'post-solve', listener: (contact: Contact, oldManifold: Manifold) => void): World;
+        off(name: 'pre-solve', listener: (contact: Contact, oldManifold: Manifold) => void): World;
         off(name: 'post-solve', listener: (contact: Contact, impulse: ContactImpulse) => void): World;
         off(name: 'remove-body', listener: (body: Body) => void): World;// never gets called?
         off(name: 'remove-joint', listener: (joint: Joint) => void): World;
@@ -722,7 +722,7 @@ declare namespace planck {
         solveVelocityConstraints(step?: any): void;//TODO
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type DistanceJointDef = Partial<{
+    type DistanceJointDef = JointDef & Partial<{
         frequencyHz: number,
         dampingRatio: number,
     }>;
@@ -784,7 +784,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number}): void;
         solvePositionConstraints(step?: any): true;//TODO
     }
-    type FrictionJointDef = Partial<{
+    type FrictionJointDef = JointDef & Partial<{
         maxForce: number,
         maxTorque: number,
     }>;
@@ -850,7 +850,7 @@ declare namespace planck {
         solveVelocityConstraints(step?: any): void;//TODO
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type GearJointDef = Partial<{
+    type GearJointDef = JointDef & Partial<{
         ratio: number,
     }>;
     interface MotorJoint {
@@ -917,7 +917,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number, inv_dt: number}): void;
         solvePositionConstraints(step?: any): true;//TODO
     }
-    type MotorJointDef = Partial<{
+    type MotorJointDef = JointDef & Partial<{
         maxForce: number,
         maxTorque: number,
         correctionFactor: number,
@@ -980,7 +980,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number}): void;
         solvePositionConstraints(step?: any): true;//TODO
     }
-    type MouseJointDef = Partial<{
+    type MouseJointDef = JointDef & Partial<{
         maxForce: number,
         frequencyHz: number,
         dampingRatio: number,
@@ -1065,7 +1065,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number}): void;
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type PrismaticJointDef = Partial<{
+    type PrismaticJointDef = JointDef & Partial<{
         enableLimit: boolean,
         lowerTranslation: number,
         upperTranslation: number,
@@ -1135,7 +1135,7 @@ declare namespace planck {
         solveVelocityConstraints(step?: any): void;//TODO
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type PulleyJointDef = Partial<{
+    type PulleyJointDef = JointDef & Partial<{
         collideConnected: boolean,
     }>;
     interface RevoluteJoint {
@@ -1213,7 +1213,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number}): void;
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type RevoluteJointDef = Partial<{
+    type RevoluteJointDef = JointDef & Partial<{
         lowerAngle: number,
         upperAngle: number,
         maxMotorTorque: number,
@@ -1279,7 +1279,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {inv_dt: number}): void;
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type RopeJointDef = Partial<{
+    type RopeJointDef = JointDef & Partial<{
         maxLength: number,
     }>;
     interface WeldJoint {
@@ -1341,7 +1341,7 @@ declare namespace planck {
         solveVelocityConstraints(step?: any): void;//TODO
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type WeldJointDef = Partial<{
+    type WeldJointDef = JointDef & Partial<{
         frequencyHz: number,
         dampingRatio: number,
     }>;
@@ -1425,7 +1425,7 @@ declare namespace planck {
         solveVelocityConstraints(step: {dt: number}): void;
         solvePositionConstraints(step?: any): boolean;//TODO
     }
-    type WheelJointDef = Partial<{
+    type WheelJointDef = JointDef & Partial<{
         enableMotor: boolean,
         maxMotorTorque: number,
         motorSpeed: number,
@@ -1789,7 +1789,7 @@ declare namespace planck {
         keyup?: (keyCode: number, label: string) => void;
     }
     
-    //function testbed(opts: any, callback: (testbed: Testbed) => World): Testbed;//opts is never used, bug?
+    function testbed(opts: any, callback: (testbed: Testbed) => World): Testbed;//opts is never used, bug?
     function testbed(callback: (testbed: Testbed) => World): Testbed;
     
 }
