@@ -115,6 +115,7 @@ declare namespace planck {
         filterCategoryBits: number,
         filterMaskBits: number,
     }>
+    type FixtureDefWithShape = FixtureDef & { shape: Shape };//debatable
     interface FixtureProxy {
         aabb: AABB;
         fixture: Fixture;
@@ -1537,7 +1538,7 @@ declare namespace planck {
     }
     let Fixture: {
         new(body: Body, shape: Shape, def?: FixtureDef | number | null): Fixture;
-        new(body: Body, def: FixtureDef & { shape: Shape }): Fixture;
+        new(body: Body, def: FixtureDefWithShape): Fixture;
     }
     let Body: {
         new(world: World, def?: BodyDef | null): Body;
