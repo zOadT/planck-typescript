@@ -1125,8 +1125,8 @@ declare namespace planck {
         getLengthA(): number;
         getLengthB(): number;
         getRatio(): number;
-        getCurrentLengthA(): Vec2;
-        getCurrentLengthB(): Vec2;
+        getCurrentLengthA(): number;
+        getCurrentLengthB(): number;
         getAnchorA(): Vec2;
         getAnchorB(): Vec2;
         getReactionForce(inv_dt: number): Vec2;
