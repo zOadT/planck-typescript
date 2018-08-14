@@ -1118,7 +1118,7 @@ declare namespace planck {
         getUserData(): unknown;
         setUserData(data: any): void;
         getCollideConnected(): boolean;
-        shiftOrigin(newOrigin: Vec2): void;//TODO there is a bug in planck
+        shiftOrigin(newOrigin: Vec2): void;
 
         getGroundAnchorA(): Vec2
         getGroundAnchorB(): Vec2
@@ -1404,7 +1404,7 @@ declare namespace planck {
         getLocalAnchorA(): Vec2;
         getLocalAnchorB(): Vec2;
         getLocalAxisA(): Vec2;
-        getJointTranslation(): number;//TODO BUG in planck (var d = pB - pA; // Vec2)
+        getJointTranslation(): number;
         getJointSpeed(): number;
         isMotorEnabled(): boolean;
         enableMotor(flag: boolean): void;
