@@ -1,7 +1,7 @@
 # planck-typescript
-Typescript definitions for [planck.js](https://github.com/shakiba/planck.js)
+Typescript definitions for [planck.js](https://github.com/shakiba/planck.js).
 
-**NOTE:** This is WIP. As soon as the definition gets production ready, we will push it to [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
+This repository is obsolete. The definition file is now maintained in the [planck.js](https://github.com/shakiba/planck.js)-repository.
 
 Things to know:
  - Typescript `3.0` is required
